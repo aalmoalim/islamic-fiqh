@@ -1,10 +1,9 @@
-# Islamic Fiqh Tools
+# Fiqh of Fasting - Interactive Guide
 
-Free interactive web applications for learning and applying Islamic Fiqh (Shafi'i School).
+Free interactive web application for learning and applying the Fiqh of Fasting (Shafi'i School).
 
-## 📱 Applications
+## 📖 Fiqh of Fasting Guide
 
-### 1. Fiqh of Fasting Guide
 Comprehensive interactive guide covering all aspects of fasting according to the Shafi'i school:
 - Conditions of obligation and validity
 - Three pillars of fasting
@@ -15,17 +14,6 @@ Comprehensive interactive guide covering all aspects of fasting according to the
 - I'tikaf (seclusion in mosque) rules
 
 **File:** `fasting_fiqh_guide.html`
-
-### 2. Mas'h al-Khuffayn Tracker
-Track your eligibility and duration for wiping over socks during prayer:
-- Qualification checker (4 conditions)
-- Duration tracker (resident/traveler)
-- Distance calculator (83km threshold)
-- Interactive map integration
-- Live countdown timer
-- Data persistence
-
-**File:** `socks_wiping_tracker.html`
 
 ## 🚀 Deployment Options
 
@@ -65,9 +53,8 @@ Track your eligibility and duration for wiping over socks during prayer:
 
 ```
 .
-├── index.html                    # Landing page (links to both apps)
+├── index.html                    # Landing page
 ├── fasting_fiqh_guide.html       # Fasting fiqh guide
-├── socks_wiping_tracker.html    # Socks wiping tracker
 └── README.md                     # This file
 ```
 
@@ -83,9 +70,10 @@ Track your eligibility and duration for wiping over socks during prayer:
 ## 🎯 Usage
 
 1. Open `index.html` in a web browser
-2. Click on either application to use it
-3. All data is stored locally in your browser
-4. No account or login required
+2. Click on the guide to open it
+3. Navigate through different sections using the menu
+4. Use interactive calculators and checkers
+5. No account or login required
 
 ## 📚 Sources
 
@@ -96,15 +84,13 @@ All content is based on:
 
 ## ⚠️ Important Note
 
-These tools are for **educational purposes only**. For specific fiqh questions and personal situations, please consult a qualified Islamic scholar.
+This guide is for **educational purposes only**. For specific fiqh questions and personal situations, please consult a qualified Islamic scholar.
 
 ## 🔧 Technical Details
 
 - **No Dependencies** - Pure HTML/CSS/JavaScript
-- **External Libraries:**
-  - Leaflet.js (for maps in socks tracker) - loaded from CDN
-  - OpenStreetMap (for geocoding) - free API
-- **Browser Storage:** Uses localStorage for data persistence
+- **No External Libraries Required** - All functionality built-in
+- **Browser Storage:** Uses localStorage for some interactive features
 - **Compatibility:** Works on all modern browsers
 
 ## 📝 License
