@@ -1,0 +1,22 @@
+# Study notes folders (not needed for website)
+01_Introduction_to_Fiqh/
+02_Fiqh_of_Purification/
+03_Fiqh_of_Prayer/
+04_Fiqh_of_Funerals/
+05_Fiqh_of_Zakat/
+06_Fiqh_of_Fasting/
+
+# Transcription files
+*.txt
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might contain personal info
+*.log
+

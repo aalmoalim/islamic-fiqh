@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiqh of Fasting - Interactive Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c5530;
+            --secondary: #4a7c59;
+            --accent: #6b9f78;
+            --light: #e8f5e9;
+            --dark: #1a1a1a;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --success: #4caf50;
+            --info: #2196f3;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+        }
+
+        .section {
+            display: none;
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card.warning {
+            background: #fff3cd;
+            border-left-color: var(--warning);
+        }
+
+        .card.danger {
+            background: #f8d7da;
+            border-left-color: var(--danger);
+        }
+
+        .card.success {
+            background: #d4edda;
+            border-left-color: var(--success);
+        }
+
+        .card.info {
+            background: #d1ecf1;
+            border-left-color: var(--info);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: var(--primary);
+            color: white;
+        }
+
+        table tr:hover {
+            background: var(--light);
+        }
+
+        .expandable {
+            margin: 1rem 0;
+        }
+
+        .expandable-header {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .expandable-header:hover {
+            background: var(--primary);
+        }
+
+        .expandable-content {
+            display: none;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 0 0 5px 5px;
+        }
+
+        .expandable.active .expandable-content {
+            display: block;
+        }
+
+        .icon {
+            transition: transform 0.3s;
+        }
+
+        .expandable.active .icon {
+            transform: rotate(180deg);
+        }
+
+        .calculator {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .form-group {
+            margin: 1rem 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .result.success {
+            background: var(--success);
+            color: white;
+        }
+
+        .result.warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .result.danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .result.info {
+            background: var(--info);
+            color: white;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .checklist li.checked:before {
+            content: "☑";
+            color: var(--success);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin: 0 4px;
+        }
+
+        .badge.required {
+            background: var(--danger);
+            color: white;
+        }
+
+        .badge.recommended {
+            background: var(--warning);
+            color: white;
+        }
+
+        .badge.permissible {
+            background: var(--info);
+            color: white;
+        }
+
+        .badge.prohibited {
+            background: #6c757d;
+            color: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-box h4 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box p {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight {
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        ol {
+            padding-left: 25px;
+            margin: 1rem 0;
+        }
+
+        ol li {
+            margin: 0.5rem 0;
+            padding-left: 0.5rem;
+        }
+
+        .expandable-content ol,
+        .card ol {
+            padding-left: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌙 Fiqh of Fasting</h1>
+            <p>Interactive Guide to Fasting Rulings (Shafi'i School)</p>
+        </header>
+
+        <nav class="nav-menu">
+            <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-btn" onclick="showSection('conditions')">Conditions</button>
+            <button class="nav-btn" onclick="showSection('pillars')">Pillars</button>
+            <button class="nav-btn" onclick="showSection('invalidators')">Invalidators</button>
+            <button class="nav-btn" onclick="showSection('expiation')">Expiation</button>
+            <button class="nav-btn" onclick="showSection('fidya')">Fidya</button>
+            <button class="nav-btn" onclick="showSection('voluntary')">Voluntary</button>
+            <button class="nav-btn" onclick="showSection('itikaf')">I'tikaf</button>
+        </nav>
+
+        <!-- Overview Section -->
+        <section id="overview" class="section active">
+            <h2>Overview of Fasting</h2>
+            
+            <div class="grid">
+                <div class="stat-box">
+                    <h4>5</h4>
+                    <p>Pillars of Islam</p>
+                </div>
+                <div class="stat-box">
+                    <h4>3</h4>
+                    <p>Pillars of Fasting</p>
+                </div>
+                <div class="stat-box">
+                    <h4>10</h4>
+                    <p>Invalidators</p>
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3>What is Fasting?</h3>
+                <p><strong>Linguistic:</strong> Abstaining from anything</p>
+                <p><strong>Legal:</strong> Abstaining from invalidators with specific intention from dawn to sunset</p>
+            </div>
+
+            <div class="card success">
+                <h3>When Was Fasting Prescribed?</h3>
+                <p>Fasting was prescribed in the <strong>2nd year of Hijrah</strong></p>
+                <p>Allah says: <em>"O you who believe, fasting is prescribed for you as it was prescribed for those before you"</em> (Quran 2:183)</p>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>📚 Complete Structure of Fasting</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <h4>Main Topics:</h4>
+                    <ul>
+                        <li><strong>Definition:</strong> Linguistic and legal meanings</li>
+                        <li><strong>Conditions of Obligation:</strong> Islam, puberty, sanity, ability</li>
+                        <li><strong>Conditions of Validity:</strong> Islam, sanity, purity</li>
+                        <li><strong>Pillars:</strong> Intention, abstaining, faster</li>
+                        <li><strong>Invalidators:</strong> 10 things that break fasting</li>
+                        <li><strong>Expiation:</strong> For intercourse during Ramadan</li>
+                        <li><strong>Fidya:</strong> For elderly, chronically ill, pregnant/nursing</li>
+                        <li><strong>Make-up:</strong> Rules for making up missed days</li>
+                        <li><strong>Voluntary Fasting:</strong> Recommended and disliked days</li>
+                        <li><strong>I'tikaf:</strong> Seclusion in mosque</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conditions Section -->
+        <section id="conditions" class="section">
+            <h2>Conditions of Fasting</h2>
+
+            <div class="card">
+                <h3>Conditions of Obligation (4)</h3>
+                <p>These determine <strong>when fasting becomes obligatory</strong>:</p>
+                <table>
+                    <tr>
+                        <th>Condition</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><strong>1. Islam</strong></td>
+                        <td>Must be Muslim</td>
+                        <td>Disbeliever → Not obligatory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Puberty</strong></td>
+                        <td>Must be adult</td>
+                        <td>Child → Not obligatory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Sanity</strong></td>
+                        <td>Must be sane</td>
+                        <td>Insane → Not obligatory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Ability</strong></td>
+                        <td>Must be able</td>
+                        <td>Sick/traveler/menstruating → Not obligatory</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Conditions of Validity (3)</h3>
+                <p>These determine <strong>when fasting is valid</strong>:</p>
+                <table>
+                    <tr>
+                        <th>Condition</th>
+                        <th>Obligation</th>
+                        <th>Validity</th>
+                    </tr>
+                    <tr>
+                        <td>Islam</td>
+                        <td>✅ Required</td>
+                        <td>✅ Required</td>
+                    </tr>
+                    <tr>
+                        <td>Puberty</td>
+                        <td>✅ Required</td>
+                        <td>❌ Not required</td>
+                    </tr>
+                    <tr>
+                        <td>Sanity</td>
+                        <td>✅ Required</td>
+                        <td>✅ Required</td>
+                    </tr>
+                    <tr>
+                        <td>Purity</td>
+                        <td>✅ Required</td>
+                        <td>✅ Required</td>
+                    </tr>
+                </table>
+                <p class="highlight">Note: Child's fasting is valid (if 8-9 years old and discerning), but not obligatory</p>
+            </div>
+
+            <div class="card warning">
+                <h3>Important Distinction</h3>
+                <p><strong>Conditions of Obligation:</strong> When you must fast</p>
+                <p><strong>Conditions of Validity:</strong> When your fast counts</p>
+                <p>Example: A child's fast is <strong>valid</strong> but not <strong>obligatory</strong></p>
+            </div>
+        </section>
+
+        <!-- Pillars Section -->
+        <section id="pillars" class="section">
+            <h2>Pillars of Fasting (3)</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Intention (النية)</h3>
+                    <p><strong>Location:</strong> Heart</p>
+                    <p><strong>Rule:</strong> One intention per day</p>
+                    <p class="badge required">Required</p>
+                </div>
+                <div class="card">
+                    <h3>2. Abstaining (الامساك)</h3>
+                    <p>From all invalidators</p>
+                    <p>Food, drink, intercourse, etc.</p>
+                    <p class="badge required">Required</p>
+                </div>
+                <div class="card">
+                    <h3>3. Faster (الصائم)</h3>
+                    <p>Valid person</p>
+                    <p>Muslim, sane, pure</p>
+                    <p class="badge required">Required</p>
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3>Intention for Obligatory Fasting</h3>
+                <p><strong>Two conditions required:</strong></p>
+                <ol>
+                    <li><strong>Tabyit (التبييت):</strong> Intention from night (before dawn)</li>
+                    <li><strong>Ta'yin (التعيين):</strong> Specify type (Ramadan, vow, expiation)</li>
+                </ol>
+                <p class="badge required">Both Required</p>
+            </div>
+
+            <div class="card success">
+                <h3>Intention for Voluntary Fasting</h3>
+                <p><strong>No conditions required!</strong></p>
+                <p>Can intend during day (if didn't do invalidator before)</p>
+                <p>Example: Woke up, no food, said "I intend to fast today" → ✅ Valid</p>
+                <p class="badge permissible">Permissible</p>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>📝 Example Intentions</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Obligatory (Ramadan):</strong></p>
+                    <p><em>"I intend to fast tomorrow to fulfill the obligation of Ramadan of this year for Allah"</em></p>
+                    <br>
+                    <p><strong>Voluntary:</strong></p>
+                    <p><em>"I intend to fast today"</em> (can be said during day if no invalidator before)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Invalidators Section -->
+        <section id="invalidators" class="section">
+            <h2>Invalidators of Fasting (10)</h2>
+
+            <div class="card danger">
+                <h3>⚠️ These Break Your Fast</h3>
+                <p>If any of these occur <strong>intentionally, knowingly, and while remembering</strong>, your fast breaks</p>
+            </div>
+
+            <div class="calculator">
+                <h3>Invalidator Checker</h3>
+                <p>Check if something breaks your fast:</p>
+                <div class="form-group">
+                    <label>What happened?</label>
+                    <select id="invalidatorSelect" onchange="checkInvalidator()">
+                        <option value="">Select an action...</option>
+                        <option value="food">Ate food</option>
+                        <option value="drink">Drank water</option>
+                        <option value="forgetful">Ate/drank forgetfully</option>
+                        <option value="vomit">Vomited intentionally</option>
+                        <option value="vomit-involuntary">Vomited involuntarily</option>
+                        <option value="intercourse">Had intercourse</option>
+                        <option value="masturbation">Masturbated</option>
+                        <option value="wet-dream">Had wet dream</option>
+                        <option value="menstruation">Menstruation started</option>
+                        <option value="medicine-nose">Medicine through nose</option>
+                        <option value="medicine-ear">Ear drops</option>
+                        <option value="enema">Enema</option>
+                    </select>
+                </div>
+                <div id="invalidatorResult"></div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>1️⃣ Reaching Hollow (5 Parts)</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p>Any <strong>substance</strong> reaching these parts breaks fasting:</p>
+                    <ol style="padding-left: 20px; line-height: 2;">
+                        <li><strong>Stomach</strong> - Food, drink</li>
+                        <li><strong>Head</strong> - Medicine through nose</li>
+                        <li><strong>Inner ear</strong> - Ear drops</li>
+                        <li><strong>Bladder</strong> - Medicine through urethra</li>
+                        <li><strong>Anus</strong> - Enema</li>
+                    </ol>
+                    <p class="badge danger">Breaks if intentional</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>2️⃣ Enema (الحقنة)</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p>Medicine through anus or urethra</p>
+                    <p class="badge danger">Always breaks</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>3️⃣ Intentional Vomiting</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p>Intentionally bringing out what's in stomach</p>
+                    <p><strong>If involuntary:</strong> Doesn't break (but must remove what can be removed)</p>
+                    <p class="badge danger">Breaks if intentional</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>4️⃣ Intercourse</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p>Intercourse during fasting</p>
+                    <p><strong>If forgetful:</strong> Doesn't break</p>
+                    <p><strong>If intentional:</strong> Breaks + requires expiation (in Ramadan)</p>
+                    <p class="badge danger">Breaks if intentional</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>5️⃣ Ejaculation (4 Cases)</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <table>
+                        <tr>
+                            <th>Case</th>
+                            <th>Ruling</th>
+                        </tr>
+                        <tr>
+                            <td>Masturbation</td>
+                            <td class="badge danger">Always breaks</td>
+                        </tr>
+                        <tr>
+                            <td>Touching/kissing (direct)</td>
+                            <td class="badge danger">Breaks</td>
+                        </tr>
+                        <tr>
+                            <td>Touching/kissing (indirect)</td>
+                            <td class="badge success">Doesn't break</td>
+                        </tr>
+                        <tr>
+                            <td>Looking/thinking (habit)</td>
+                            <td class="badge danger">Breaks</td>
+                        </tr>
+                        <tr>
+                            <td>Looking/thinking (not habit)</td>
+                            <td class="badge success">Doesn't break</td>
+                        </tr>
+                        <tr>
+                            <td>Wet dream</td>
+                            <td class="badge success">Never breaks</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>6️⃣-🔟 Menstruation, Postpartum, Insanity, Apostasy</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p>These break fasting <strong>immediately</strong> (no conditions needed):</p>
+                    <ul>
+                        <li><strong>Menstruation</strong> - Even moment before sunset</li>
+                        <li><strong>Postpartum</strong> - Bleeding after childbirth</li>
+                        <li><strong>Insanity</strong> - Even for a moment</li>
+                        <li><strong>Apostasy</strong> - Leaving Islam, even for a moment</li>
+                    </ul>
+                    <p class="badge danger">Always breaks</p>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3>✅ What Doesn't Break Fasting</h3>
+                <ul>
+                    <li>Forgetful eating/drinking (even if much)</li>
+                    <li>Ignorant eating (if excused - new Muslim or far from scholars)</li>
+                    <li>Involuntary vomiting</li>
+                    <li>Wet dream</li>
+                    <li>Swallowing saliva</li>
+                    <li>Taste in mouth (without substance)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Expiation Section -->
+        <section id="expiation" class="section">
+            <h2>Expiation for Intercourse During Ramadan</h2>
+
+            <div class="card danger">
+                <h3>⚠️ Severe Ruling</h3>
+                <p>Intercourse during Ramadan day requires <strong>expiation (كفارة مغلظة)</strong></p>
+                <p>This is <strong>only for intercourse</strong> - not eating, drinking, etc.</p>
+            </div>
+
+            <div class="calculator">
+                <h3>Expiation Calculator</h3>
+                <p>Calculate what you need to do:</p>
+                <div class="form-group">
+                    <label>Can you free a Muslim slave who can work?</label>
+                    <select id="slaveSelect" onchange="calculateExpiation()">
+                        <option value="">Select...</option>
+                        <option value="yes">Yes, I can</option>
+                        <option value="no">No, I cannot</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Can you fast 2 consecutive months?</label>
+                    <select id="fastSelect" onchange="calculateExpiation()">
+                        <option value="">Select...</option>
+                        <option value="yes">Yes, I can</option>
+                        <option value="no">No, I cannot</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Can you feed 60 poor people (1 mudd each)?</label>
+                    <select id="feedSelect" onchange="calculateExpiation()">
+                        <option value="">Select...</option>
+                        <option value="yes">Yes, I can</option>
+                        <option value="no">No, I cannot</option>
+                    </select>
+                </div>
+                <div id="expiationResult"></div>
+            </div>
+
+            <div class="card">
+                <h3>Conditions for Expiation (10)</h3>
+                <p>Expiation required only if <strong>all</strong> conditions met:</p>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li>✅ Intercourse (not other invalidators)</li>
+                    <li>✅ Daytime (not night)</li>
+                    <li>✅ Ramadan (not other fasting)</li>
+                    <li>✅ Intentional (not forced)</li>
+                    <li>✅ Knowing (not ignorant)</li>
+                    <li>✅ Remembering (not forgetful)</li>
+                    <li>✅ In private parts</li>
+                    <li>✅ Obligated to fast (not child)</li>
+                    <li>✅ Intended from night</li>
+                    <li>✅ Sinful (not traveler/sick)</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>What Results (6 Things for Man)</h3>
+                <ol>
+                    <li><strong>Sin</strong> - Commits major sin</li>
+                    <li><strong>Invalidates fasting</strong> - Whether ejaculated or not</li>
+                    <li><strong>Must abstain rest of day</strong> - Respect for month</li>
+                    <li><strong>Make-up required</strong> - Must make up the day</li>
+                    <li><strong>Expiation required</strong> - Must perform expiation</li>
+                    <li><strong>Discretionary punishment</strong> - If caught and not repentant</li>
+                </ol>
+            </div>
+
+            <div class="card info">
+                <h3>For the Woman</h3>
+                <p><strong>5 things</strong> (no expiation in Shafi'i view):</p>
+                <ol>
+                    <li>Sin (unless forced)</li>
+                    <li>Invalidates fasting (unless forced)</li>
+                    <li>Must abstain rest of day</li>
+                    <li>Make-up required</li>
+                    <li>Discretionary punishment</li>
+                </ol>
+                <p class="badge info">No expiation for woman (Shafi'i view)</p>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>📋 Three Levels of Expiation (Must Do in Order)</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <h4>Level 1: Free Slave</h4>
+                    <p>Conditions: Muslim, able to work</p>
+                    <p>If can't find → Move to Level 2</p>
+                    
+                    <h4>Level 2: Fast 2 Months Consecutive</h4>
+                    <p>Requirements: Tabyit (intend from night), Ta'yin (specify expiation)</p>
+                    <p>If breaks with excuse that allows fasting (sickness, travel) → Restart</p>
+                    <p>If breaks with excuse that doesn't allow fasting (insanity, menstruation) → Continue</p>
+                    <p>If can't fast → Move to Level 3</p>
+                    
+                    <h4>Level 3: Feed 60 Poor</h4>
+                    <p>Amount: 1 mudd per person (≈750g staple food)</p>
+                    <p>Must give to 60 different poor people</p>
+                    <p>Cannot cook and invite them (must own the food)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fidya Section -->
+        <section id="fidya" class="section">
+            <h2>Fidya (Expiation for Missed Fasting)</h2>
+
+            <div class="calculator">
+                <h3>Fidya Calculator</h3>
+                <div class="form-group">
+                    <label>Who needs fidya?</label>
+                    <select id="fidyaType" onchange="calculateFidya()">
+                        <option value="">Select...</option>
+                        <option value="elderly">Elderly person (can't fast)</option>
+                        <option value="chronically-ill">Chronically ill (incurable disease)</option>
+                        <option value="pregnant-child">Pregnant (fears for fetus)</option>
+                        <option value="nursing-child">Nursing (fears for baby)</option>
+                        <option value="pregnant-self">Pregnant (fears for self only)</option>
+                        <option value="nursing-self">Nursing (fears for self only)</option>
+                        <option value="delayed">Delayed make-up until next Ramadan</option>
+                        <option value="death">Died with missed fasting</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of days:</label>
+                    <input type="number" id="fidyaDays" min="1" value="1" onchange="calculateFidya()">
+                </div>
+                <div id="fidyaResult"></div>
+            </div>
+
+            <div class="card">
+                <h3>Three Causes of Fidya</h3>
+                <ol>
+                    <li><strong>Missing fasting</strong> - Died with missed fasting (3 of 4 cases)</li>
+                    <li><strong>Missing virtue of time</strong> - Pregnant/nursing feared for child</li>
+                    <li><strong>Delaying make-up</strong> - Delayed until next Ramadan</li>
+                </ol>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>💀 Death with Missed Fasting (4 Cases)</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <table>
+                        <tr>
+                            <th>Case</th>
+                            <th>Description</th>
+                            <th>Fidya?</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Missed with excuse, couldn't make up</td>
+                            <td class="badge success">No</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Missed with excuse, could make up but didn't</td>
+                            <td class="badge danger">Yes</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Missed without excuse, couldn't make up</td>
+                            <td class="badge danger">Yes</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Missed without excuse, could make up but didn't</td>
+                            <td class="badge danger">Yes</td>
+                        </tr>
+                    </table>
+                    <p><strong>Reliable opinion:</strong> Can feed or fast on behalf of deceased</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Elderly & Chronically Ill</h3>
+                <p><strong>Ruling:</strong> Feed 1 mudd per day</p>
+                <p><strong>Amount:</strong> 1 mudd ≈ 750g staple food</p>
+                <p><strong>Timing:</strong> After Fajr of each day (or from night after Maghrib)</p>
+                <p class="badge required">Required</p>
+            </div>
+
+            <div class="card">
+                <h3>Pregnant & Nursing Women</h3>
+                <table>
+                    <tr>
+                        <th>Case</th>
+                        <th>What Must They Do?</th>
+                    </tr>
+                    <tr>
+                        <td>Fear for child</td>
+                        <td>Make-up + Fidya (1 mudd per day)</td>
+                    </tr>
+                    <tr>
+                        <td>Fear for self only</td>
+                        <td>Make-up only (no fidya)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card warning">
+                <h3>Delaying Make-Up</h3>
+                <p>If delays make-up (with ability) until next Ramadan:</p>
+                <ul>
+                    <li>Must make up</li>
+                    <li>Must pay fidya (1 mudd per day)</li>
+                    <li>If delays again → Fidya doubles (2 mudd per day)</li>
+                    <li>Repeats yearly</li>
+                </ul>
+                <p class="badge warning">Fidya increases yearly</p>
+            </div>
+        </section>
+
+        <!-- Voluntary Section -->
+        <section id="voluntary" class="section">
+            <h2>Voluntary Fasting</h2>
+
+            <div class="card success">
+                <h3>Recommended Days (3 Types)</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Days</th>
+                        <th>Notes</th>
+                    </tr>
+                    <tr>
+                        <td>Yearly</td>
+                        <td>Arafah, Ashura, Tasu'a, 6 Shawwal</td>
+                        <td>Once per year</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly</td>
+                        <td>White days (13, 14, 15)</td>
+                        <td>Every month</td>
+                    </tr>
+                    <tr>
+                        <td>Weekly</td>
+                        <td>Monday, Thursday</td>
+                        <td>Every week</td>
+                    </tr>
+                </table>
+                <p class="badge recommended">Recommended</p>
+            </div>
+
+            <div class="card warning">
+                <h3>Disliked Days</h3>
+                <ul>
+                    <li>Saturday alone</li>
+                    <li>Sunday alone</li>
+                    <li>Friday alone</li>
+                    <li>All year (if harmful or misses rights)</li>
+                </ul>
+                <p class="badge prohibited">Disliked</p>
+            </div>
+
+            <div class="card danger">
+                <h3>Prohibited Days (5)</h3>
+                <ol>
+                    <li>Eid al-Fitr</li>
+                    <li>Eid al-Adha</li>
+                    <li>11th Dhul-Hijjah (Tashriq)</li>
+                    <li>12th Dhul-Hijjah (Tashriq)</li>
+                    <li>13th Dhul-Hijjah (Tashriq)</li>
+                </ol>
+                <p class="badge prohibited">Prohibited and Invalid</p>
+            </div>
+
+            <div class="card">
+                <h3>Day of Doubt (يوم الشك)</h3>
+                <p><strong>30th of Sha'ban</strong> if:</p>
+                <ul>
+                    <li>Didn't see moon + sky was clear</li>
+                    <li>People talked about seeing it</li>
+                    <li>Witnessed by unreliable witness (child, woman, slave, sinner)</li>
+                </ul>
+                <p><strong>Ruling:</strong> Disliked (unless matches habit, make-up, or vow)</p>
+                <p class="badge prohibited">Disliked</p>
+            </div>
+
+            <div class="card">
+                <h3>After Half of Sha'ban</h3>
+                <p><strong>Ruling:</strong> Prohibited (unless connected to first half)</p>
+                <p>Example: Started 10th, continues → ✅ Permissible</p>
+                <p>Example: Started 17th → ❌ Prohibited</p>
+                <p class="badge prohibited">Prohibited</p>
+            </div>
+        </section>
+
+        <!-- I'tikaf Section -->
+        <section id="itikaf" class="section">
+            <h2>I'tikaf (Seclusion in Mosque)</h2>
+
+            <div class="card info">
+                <h3>Definition & Ruling</h3>
+                <p><strong>Linguistic:</strong> Staying on something (good or bad)</p>
+                <p><strong>Legal:</strong> Staying in mosque with specific description</p>
+                <p><strong>Ruling:</strong> Recommended (Sunnah) - In all times</p>
+                <p><strong>Best time:</strong> Last 10 nights of Ramadan (seeking Laylat al-Qadr)</p>
+                <p class="badge recommended">Recommended</p>
+            </div>
+
+            <div class="card">
+                <h3>Four Pillars</h3>
+                <table>
+                    <tr>
+                        <th>Pillar</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>1. Person</td>
+                        <td>Muslim, sane, pure from hayd/nifas</td>
+                    </tr>
+                    <tr>
+                        <td>2. Place</td>
+                        <td>Mosque (not house, library, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td>3. Intention</td>
+                        <td>If vowed: intend obligation; if recommended: just intend I'tikaf</td>
+                    </tr>
+                    <tr>
+                        <td>4. Duration</td>
+                        <td>More than tumaninah (time of saying "Subhan Allah")</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Laylat al-Qadr</h3>
+                <p><strong>In Shafi'i school:</strong> Restricted to last 10 nights</p>
+                <p><strong>Most likely:</strong> 21st night (Shafi'i view)</p>
+                <p><strong>Others say:</strong> 27th night (most common)</p>
+                <p><strong>Others say:</strong> Moving (Nawawi's choice)</p>
+                <p>All nights possible, <strong>odd nights more likely</strong></p>
+            </div>
+
+            <div class="card danger">
+                <h3>Invalidators</h3>
+                <ul>
+                    <li><strong>Intercourse</strong> - Intentional, knowing, remembering</li>
+                    <li><strong>Leaving</strong> (if vowed) - Only for need (urination, defecation, ghusl, hayd/nifas, severe illness)</li>
+                    <li><strong>Apostasy</strong> - Even for moment</li>
+                    <li><strong>Intoxication</strong></li>
+                </ul>
+                <p class="badge danger">Breaks I'tikaf</p>
+            </div>
+
+            <div class="card success">
+                <h3>What Doesn't Break I'tikaf</h3>
+                <ul>
+                    <li>Touching with desire (if doesn't ejaculate)</li>
+                    <li>Looking/thinking (if not habitual)</li>
+                    <li>Wet dream</li>
+                    <li>Leaving for need (if vowed)</li>
+                    <li>Leaving anytime (if recommended)</li>
+                </ul>
+                <p><strong>Rule:</strong> What invalidates fasting invalidates I'tikaf</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleExpand(element) {
+            element.parentElement.classList.toggle('active');
+        }
+
+        function checkInvalidator() {
+            const select = document.getElementById('invalidatorSelect');
+            const result = document.getElementById('invalidatorResult');
+            const value = select.value;
+
+            const rulings = {
+                'food': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Intentional eating breaks fasting. You must make up this day.' },
+                'drink': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Intentional drinking breaks fasting. You must make up this day.' },
+                'forgetful': { breaks: false, class: 'success', text: '✅ DOES NOT BREAK - Forgetful eating/drinking does not break fasting. Continue your fast.' },
+                'vomit': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Intentional vomiting breaks fasting. You must make up this day.' },
+                'vomit-involuntary': { breaks: false, class: 'success', text: '✅ DOES NOT BREAK - Involuntary vomiting does not break, but remove what you can and do not return anything to stomach.' },
+                'intercourse': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING + EXPIATION REQUIRED - Intercourse breaks fasting and requires expiation (if in Ramadan day). You must make up and perform expiation.' },
+                'masturbation': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Masturbation always breaks fasting. You must make up this day.' },
+                'wet-dream': { breaks: false, class: 'success', text: '✅ DOES NOT BREAK - Wet dream never breaks fasting. Continue your fast.' },
+                'menstruation': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Menstruation breaks fasting immediately. You must make up after purity.' },
+                'medicine-nose': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Medicine through nose reaches head (hollow part). You must make up this day.' },
+                'medicine-ear': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Ear drops reach inner ear (hollow part). You must make up this day.' },
+                'enema': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Enema breaks fasting. You must make up this day.' }
+            };
+
+            if (value && rulings[value]) {
+                const ruling = rulings[value];
+                result.innerHTML = `<div class="result ${ruling.class}">${ruling.text}</div>`;
+            } else {
+                result.innerHTML = '';
+            }
+        }
+
+        function calculateExpiation() {
+            const slave = document.getElementById('slaveSelect').value;
+            const fast = document.getElementById('fastSelect').value;
+            const feed = document.getElementById('feedSelect').value;
+            const result = document.getElementById('expiationResult');
+
+            if (!slave || !fast || !feed) {
+                result.innerHTML = '';
+                return;
+            }
+
+            let html = '<div class="result info"><h4>Your Expiation:</h4><ol>';
+
+            if (slave === 'yes') {
+                html += '<li><strong>Level 1: Free a Muslim slave</strong> who is able to work</li>';
+                html += '<li>You cannot skip to level 2 or 3</li>';
+            } else if (fast === 'yes') {
+                html += '<li><strong>Level 2: Fast 2 consecutive months</strong></li>';
+                html += '<li>Must intend from night (tabyit)</li>';
+                html += '<li>Must specify it is expiation (ta\'yin)</li>';
+                html += '<li>If breaks with excuse that allows fasting (sickness, travel) → Restart</li>';
+                html += '<li>If breaks with excuse that doesn\'t allow fasting (insanity, menstruation) → Continue</li>';
+            } else if (feed === 'yes') {
+                html += '<li><strong>Level 3: Feed 60 poor people</strong></li>';
+                html += '<li>1 mudd per person (≈750g staple food)</li>';
+                html += '<li>Must give to 60 different poor people</li>';
+                html += '<li>Cannot cook and invite them (must own the food)</li>';
+            } else {
+                html += '<li><strong>Expiation remains in debt</strong></li>';
+                html += '<li>Must perform when able</li>';
+                html += '<li>Even if you die, taken from estate</li>';
+            }
+
+            html += '</ol></div>';
+            result.innerHTML = html;
+        }
+
+        function calculateFidya() {
+            const type = document.getElementById('fidyaType').value;
+            const days = parseInt(document.getElementById('fidyaDays').value) || 1;
+            const result = document.getElementById('fidyaResult');
+
+            if (!type) {
+                result.innerHTML = '';
+                return;
+            }
+
+            let html = '<div class="result info"><h4>Fidya Calculation:</h4>';
+
+            const rulings = {
+                'elderly': {
+                    fidya: true,
+                    makeup: false,
+                    text: `Elderly person who cannot fast:<br>• Feed <strong>${days} mudd</strong> (≈${days * 0.75}kg staple food)<br>• 1 mudd per day<br>• After Fajr of each day (or from night after Maghrib)<br>• No make-up required`
+                },
+                'chronically-ill': {
+                    fidya: true,
+                    makeup: false,
+                    text: `Chronically ill (incurable disease):<br>• Feed <strong>${days} mudd</strong> (≈${days * 0.75}kg staple food)<br>• 1 mudd per day<br>• After Fajr of each day (or from night after Maghrib)<br>• No make-up required`
+                },
+                'pregnant-child': {
+                    fidya: true,
+                    makeup: true,
+                    text: `Pregnant (fears for fetus):<br>• Make-up required: <strong>${days} days</strong><br>• Fidya required: <strong>${days} mudd</strong> (≈${days * 0.75}kg)<br>• Reason: Two benefit (mother + child) → Two obligations`
+                },
+                'nursing-child': {
+                    fidya: true,
+                    makeup: true,
+                    text: `Nursing (fears for baby):<br>• Make-up required: <strong>${days} days</strong><br>• Fidya required: <strong>${days} mudd</strong> (≈${days * 0.75}kg)<br>• Reason: Two benefit (mother + child) → Two obligations`
+                },
+                'pregnant-self': {
+                    fidya: false,
+                    makeup: true,
+                    text: `Pregnant (fears for self only):<br>• Make-up required: <strong>${days} days</strong><br>• No fidya required<br>• Reason: One benefits (mother only) → One obligation`
+                },
+                'nursing-self': {
+                    fidya: false,
+                    makeup: true,
+                    text: `Nursing (fears for self only):<br>• Make-up required: <strong>${days} days</strong><br>• No fidya required<br>• Reason: One benefits (mother only) → One obligation`
+                },
+                'delayed': {
+                    fidya: true,
+                    makeup: true,
+                    text: `Delayed make-up until next Ramadan:<br>• Make-up required: <strong>${days} days</strong><br>• Fidya required: <strong>${days} mudd</strong> (≈${days * 0.75}kg)<br>• If delays again → Fidya doubles (${days * 2} mudd)<br>• Repeats yearly`
+                },
+                'death': {
+                    fidya: true,
+                    makeup: false,
+                    text: `Died with missed fasting:<br>• Fidya: <strong>${days} mudd</strong> (≈${days * 0.75}kg)<br>• Can feed or fast on behalf (reliable opinion)<br>• From estate of deceased<br>• Not obligatory on guardian (recommended)`
+                }
+            };
+
+            const ruling = rulings[type];
+            html += `<p>${ruling.text}</p>`;
+            html += '</div>';
+            result.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
+
