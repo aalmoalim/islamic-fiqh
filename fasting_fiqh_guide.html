@@ -148,17 +148,25 @@
             border-left-color: var(--info);
         }
 
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
             background: white;
+            min-width: 600px;
         }
 
         table th, table td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            white-space: nowrap;
         }
 
         table th {
@@ -380,6 +388,40 @@
             .grid {
                 grid-template-columns: 1fr;
             }
+
+            .table-wrapper {
+                margin: 1rem -1rem;
+                padding: 0 1rem;
+            }
+
+            table {
+                min-width: 500px;
+                font-size: 0.9rem;
+            }
+
+            table th, table td {
+                padding: 8px 10px;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
         }
 
         .highlight {
@@ -483,6 +525,7 @@
             <div class="card">
                 <h3>Conditions of Obligation (4)</h3>
                 <p>These determine <strong>when fasting becomes obligatory</strong>:</p>
+                <div class="table-wrapper">
                 <table>
                     <tr>
                         <th>Condition</th>
@@ -510,11 +553,13 @@
                         <td>Sick/traveler/menstruating → Not obligatory</td>
                     </tr>
                 </table>
+                </div>
             </div>
 
             <div class="card">
                 <h3>Conditions of Validity (3)</h3>
                 <p>These determine <strong>when fasting is valid</strong>:</p>
+                <div class="table-wrapper">
                 <table>
                     <tr>
                         <th>Condition</th>
@@ -542,6 +587,7 @@
                         <td>✅ Required</td>
                     </tr>
                 </table>
+                </div>
                 <p class="highlight">Note: Child's fasting is valid (if 8-9 years old and discerning), but not obligatory</p>
             </div>
 
@@ -704,6 +750,7 @@
                     <span class="icon">▼</span>
                 </div>
                 <div class="expandable-content">
+                    <div class="table-wrapper">
                     <table>
                         <tr>
                             <th>Case</th>
@@ -734,6 +781,7 @@
                             <td class="badge success">Never breaks</td>
                         </tr>
                     </table>
+                    </div>
                 </div>
             </div>
 
@@ -915,6 +963,7 @@
                     <span class="icon">▼</span>
                 </div>
                 <div class="expandable-content">
+                    <div class="table-wrapper">
                     <table>
                         <tr>
                             <th>Case</th>
@@ -942,6 +991,7 @@
                             <td class="badge danger">Yes</td>
                         </tr>
                     </table>
+                    </div>
                     <p><strong>Reliable opinion:</strong> Can feed or fast on behalf of deceased</p>
                 </div>
             </div>
@@ -956,6 +1006,7 @@
 
             <div class="card">
                 <h3>Pregnant & Nursing Women</h3>
+                <div class="table-wrapper">
                 <table>
                     <tr>
                         <th>Case</th>
@@ -970,6 +1021,7 @@
                         <td>Make-up only (no fidya)</td>
                     </tr>
                 </table>
+                </div>
             </div>
 
             <div class="card warning">
@@ -991,6 +1043,7 @@
 
             <div class="card success">
                 <h3>Recommended Days (3 Types)</h3>
+                <div class="table-wrapper">
                 <table>
                     <tr>
                         <th>Type</th>
@@ -1013,6 +1066,7 @@
                         <td>Every week</td>
                     </tr>
                 </table>
+                </div>
                 <p class="badge recommended">Recommended</p>
             </div>
 
@@ -1075,6 +1129,7 @@
 
             <div class="card">
                 <h3>Four Pillars</h3>
+                <div class="table-wrapper">
                 <table>
                     <tr>
                         <th>Pillar</th>
@@ -1097,6 +1152,7 @@
                         <td>More than tumaninah (time of saying "Subhan Allah")</td>
                     </tr>
                 </table>
+                </div>
             </div>
 
             <div class="card">
