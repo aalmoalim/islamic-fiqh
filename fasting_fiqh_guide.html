@@ -408,7 +408,16 @@
     <div class="container">
         <header>
             <h1>🌙 Fiqh of Fasting</h1>
-            <p>Interactive Guide to Fasting Rulings (Shafi'i School)</p>
+            <p>Interactive Guide to Fasting Rulings</p>
+            <div style="margin-top: 1.5rem;">
+                <label for="schoolSelect" style="margin-right: 10px; font-size: 1rem;">Select School:</label>
+                <select id="schoolSelect" onchange="changeSchool()" style="padding: 10px 20px; font-size: 1rem; border-radius: 5px; border: 2px solid white; background: rgba(255,255,255,0.2); color: white; cursor: pointer;">
+                    <option value="shafii" selected>Shafi'i School</option>
+                    <option value="maliki">Maliki School</option>
+                    <option value="hanafi">Hanafi School (Coming Soon)</option>
+                    <option value="hanbali">Hanbali School (Coming Soon)</option>
+                </select>
+            </div>
         </header>
 
         <nav class="nav-menu">
@@ -423,28 +432,55 @@
         </nav>
 
         <!-- Overview Section -->
-        <section id="overview" class="section active">
+        <section id="overview" class="section active" data-school="all">
             <h2>Overview of Fasting</h2>
             
-            <div class="grid">
-                <div class="stat-box">
-                    <h4>5</h4>
-                    <p>Pillars of Islam</p>
+            <!-- Shafi'i Content -->
+            <div data-school="shafii">
+                <div class="grid">
+                    <div class="stat-box">
+                        <h4>5</h4>
+                        <p>Pillars of Islam</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>3</h4>
+                        <p>Pillars of Fasting</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>10</h4>
+                        <p>Invalidators</p>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <h4>3</h4>
-                    <p>Pillars of Fasting</p>
-                </div>
-                <div class="stat-box">
-                    <h4>10</h4>
-                    <p>Invalidators</p>
+
+                <div class="card info">
+                    <h3>What is Fasting? (Shafi'i)</h3>
+                    <p><strong>Linguistic:</strong> Abstaining from anything</p>
+                    <p><strong>Legal:</strong> Abstaining from invalidators with specific intention from dawn to sunset</p>
                 </div>
             </div>
 
-            <div class="card info">
-                <h3>What is Fasting?</h3>
-                <p><strong>Linguistic:</strong> Abstaining from anything</p>
-                <p><strong>Legal:</strong> Abstaining from invalidators with specific intention from dawn to sunset</p>
+            <!-- Maliki Content -->
+            <div data-school="maliki" style="display: none;">
+                <div class="grid">
+                    <div class="stat-box">
+                        <h4>5</h4>
+                        <p>Pillars of Islam</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>2</h4>
+                        <p>Pillars of Fasting</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>8</h4>
+                        <p>Invalidators</p>
+                    </div>
+                </div>
+
+                <div class="card info">
+                    <h3>What is Fasting? (Maliki)</h3>
+                    <p><strong>Linguistic:</strong> Abstaining</p>
+                    <p><strong>Legal:</strong> Abstaining from the two desires (belly and private parts) or what takes their place in all parts of the day from dawn to sunset, seeking nearness to Allah</p>
+                </div>
             </div>
 
             <div class="card success">
@@ -477,7 +513,7 @@
         </section>
 
         <!-- Conditions Section -->
-        <section id="conditions" class="section">
+        <section id="conditions" class="section" data-school="shafii">
             <h2>Conditions of Fasting</h2>
 
             <div class="card">
@@ -554,7 +590,7 @@
         </section>
 
         <!-- Pillars Section -->
-        <section id="pillars" class="section">
+        <section id="pillars" class="section" data-school="shafii">
             <h2>Pillars of Fasting (3)</h2>
 
             <div class="grid">
@@ -612,7 +648,7 @@
         </section>
 
         <!-- Invalidators Section -->
-        <section id="invalidators" class="section">
+        <section id="invalidators" class="section" data-school="shafii">
             <h2>Invalidators of Fasting (10)</h2>
 
             <div class="card danger">
@@ -768,7 +804,7 @@
         </section>
 
         <!-- Expiation Section -->
-        <section id="expiation" class="section">
+        <section id="expiation" class="section" data-school="shafii">
             <h2>Expiation for Intercourse During Ramadan</h2>
 
             <div class="card danger">
@@ -874,7 +910,7 @@
         </section>
 
         <!-- Fidya Section -->
-        <section id="fidya" class="section">
+        <section id="fidya" class="section" data-school="shafii">
             <h2>Fidya (Expiation for Missed Fasting)</h2>
 
             <div class="calculator">
@@ -986,7 +1022,7 @@
         </section>
 
         <!-- Voluntary Section -->
-        <section id="voluntary" class="section">
+        <section id="voluntary" class="section" data-school="shafii">
             <h2>Voluntary Fasting</h2>
 
             <div class="card success">
@@ -1061,7 +1097,7 @@
         </section>
 
         <!-- I'tikaf Section -->
-        <section id="itikaf" class="section">
+        <section id="itikaf" class="section" data-school="shafii">
             <h2>I'tikaf (Seclusion in Mosque)</h2>
 
             <div class="card info">
@@ -1131,13 +1167,283 @@
                 <p><strong>Rule:</strong> What invalidates fasting invalidates I'tikaf</p>
             </div>
         </section>
+
+        <!-- Maliki School Comprehensive Section -->
+        <section id="maliki-comprehensive" class="section" data-school="maliki" style="display: none;">
+            <h2>Maliki School - Complete Guide</h2>
+            
+            <div class="card info">
+                <h3>Key Differences from Shafi'i</h3>
+                <ul>
+                    <li><strong>2 Pillars</strong> (not 3) - Intention and Abstaining</li>
+                    <li><strong>Intention at night</strong> even for voluntary fasting</li>
+                    <li><strong>Forgetful eating</strong> requires make-up</li>
+                    <li><strong>Expiation is choice</strong> (not order) - Feed 60, fast 2 months, or free slave</li>
+                    <li><strong>Reaching throat</strong> breaks (not just stomach)</li>
+                    <li><strong>Close justification</strong> prevents expiation</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Conditions of Fasting (Maliki)</h3>
+                <h4>Conditions of Obligation (3)</h4>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Puberty</strong> - Child not obligated</li>
+                    <li><strong>Ability</strong> - Must be able (sick, pregnant, nursing not obligated)</li>
+                    <li><strong>Residence</strong> - Traveler not obligated (77 km, qasr distance)</li>
+                </ol>
+                
+                <h4>Conditions of Obligation & Validity (4)</h4>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Sanity</strong> - Insane/unconscious not obligated, not valid</li>
+                    <li><strong>Purity</strong> - From hayd/nifas (not obligated, not valid)</li>
+                    <li><strong>Entry of time</strong> - Ramadan must be established</li>
+                    <li><strong>Valid time</strong> - Time must allow fasting (not Eid, etc.)</li>
+                </ol>
+                
+                <h4>Condition of Validity Only (1)</h4>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Islam</strong> - Must be Muslim</li>
+                </ol>
+                
+                <div class="card warning">
+                    <p><strong>Unconscious Rule:</strong> If unconscious half day → Valid. If most/all day → Invalid, must make up.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Pillars of Fasting (2 - Maliki)</h3>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Intention</strong> - Must be at night (even for voluntary)</li>
+                    <li><strong>Abstaining</strong> - From two desires or what takes their place</li>
+                </ol>
+                
+                <div class="card warning">
+                    <p><strong>Important:</strong> In Maliki school, intention must be at night even for voluntary fasting (differs from Shafi'i).</p>
+                    <p><strong>One intention:</strong> For consecutive fasting (Ramadan), one intention at beginning covers all days.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Invalidators (Maliki)</h3>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Liquid reaching throat</strong> - From any upper passage (mouth, nose, ear, eye)</li>
+                    <li><strong>Liquid to stomach</strong> - From mouth or anus</li>
+                    <li><strong>Solid to stomach</strong> - From mouth only (not anus)</li>
+                    <li><strong>Intentional vomiting</strong></li>
+                    <li><strong>Intercourse</strong> - Even if doesn't ejaculate</li>
+                    <li><strong>Emission</strong> - By touching, looking, or thinking</li>
+                    <li><strong>Breaking intention</strong> - No intention from night or rejecting during day</li>
+                    <li><strong>Swallowing vomit</strong> - If can remove it from throat</li>
+                    <li><strong>Inhaling incense/steam</strong> - If reaches throat</li>
+                </ol>
+                
+                <div class="card info">
+                    <p><strong>Key Difference:</strong> Reaching throat breaks (not just stomach). Any liquid from upper passages reaching throat breaks fasting.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Types of Those Who Break (Maliki)</h3>
+                
+                <h4>1. Make-up Only</h4>
+                <ul>
+                    <li>Traveler (4 conditions: qasr distance, permissible, intend from night, leave before Fajr)</li>
+                    <li>Menstruating/Postpartum</li>
+                    <li>Sick</li>
+                    <li>With close justification (تأويل قريب)</li>
+                    <li>Ignorant (new Muslim)</li>
+                    <li>Forced</li>
+                    <li><strong>Forgetful</strong> - Must make up (Maliki view - differs from Shafi'i)</li>
+                </ul>
+                
+                <h4>2. Make-up + Fidya</h4>
+                <ul>
+                    <li>Nursing (fears for child) - 1 mudd per day</li>
+                    <li>Delayed make-up (without excuse until next Ramadan) - 1 mudd per day</li>
+                </ul>
+                
+                <h4>3. Make-up + Expiation</h4>
+                <ul>
+                    <li>Intentional, by choice, without close justification, without ignorance</li>
+                    <li>5 conditions: Intentional, by choice, without close justification, without ignorance, violating month</li>
+                </ul>
+                
+                <h4>4. Fidya Only (Recommended)</h4>
+                <ul>
+                    <li>Elderly (can't fast)</li>
+                    <li>Chronically ill (incurable disease)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Expiation (Maliki) - Choice, Not Order</h3>
+                <p><strong>Three options</strong> (can choose any):</p>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Feed 60 poor</strong> - 1 mudd each (BEST - benefit extends)</li>
+                    <li><strong>Fast 2 months consecutive</strong></li>
+                    <li><strong>Free slave</strong> - Muslim slave</li>
+                </ol>
+                
+                <div class="card success">
+                    <p><strong>Key Difference:</strong> In Maliki, expiation is choice (not order). Can do any option first. Feeding 60 poor is best because benefit extends to others.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Close vs. Far Justification (Maliki)</h3>
+                
+                <h4>Close Justification (تأويل قريب)</h4>
+                <p>Justification based on <strong>something existing</strong> → <strong>Make-up only</strong> (no expiation)</p>
+                <p><strong>Examples:</strong></p>
+                <ul>
+                    <li>Ate forgetfully, thought fast invalid</li>
+                    <li>Came from travel before Fajr, thought can break</li>
+                    <li>Became junub at night, thought can break</li>
+                </ul>
+                
+                <h4>Far Justification (تأويل بعيد)</h4>
+                <p>Justification based on <strong>something imagined</strong> → <strong>Make-up + Expiation</strong></p>
+                <p><strong>Examples:</strong></p>
+                <ul>
+                    <li>Woman with regular period (7th-8th every month) - Breaks thinking period will come</li>
+                    <li>Sick person expecting attack (regular attacks) - Breaks thinking attack will come</li>
+                </ul>
+                
+                <div class="card warning">
+                    <p><strong>Rule:</strong> Must fast, then if excuse appears, break. Cannot break based on expectation.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>I'tikaf (Maliki)</h3>
+                
+                <h4>Conditions (6)</h4>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Intention</strong></li>
+                    <li><strong>Permissible mosque</strong> - Must be mosque, not restricted</li>
+                    <li><strong>Islam</strong></li>
+                    <li><strong>Discernment</strong> - Not insane, not child without discernment</li>
+                    <li><strong>Minimum: Day and night</strong> - Enter before Maghrib, exit after Maghrib</li>
+                    <li><strong>Fasting</strong> - Must be fasting (obligatory or voluntary)</li>
+                </ol>
+                
+                <h4>Invalidators</h4>
+                <ul>
+                    <li>Breaking fast intentionally</li>
+                    <li>Intercourse or foreplay (day or night - even if unintentional)</li>
+                    <li>Leaving without need</li>
+                    <li>Drinking intoxicant intentionally (even at night)</li>
+                </ul>
+                
+                <div class="card info">
+                    <p><strong>Key Difference:</strong> I'tikaf requires at least day and night (not just tumaninah). Foreplay even if unintentional breaks I'tikaf.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Establishing Ramadan (Maliki)</h3>
+                <p><strong>Four ways:</strong></p>
+                <ol style="padding-left: 20px; line-height: 2;">
+                    <li><strong>Completing Sha'ban 30 days</strong> - If moon not seen</li>
+                    <li><strong>Two just witnesses</strong> - Two just people see moon</li>
+                    <li><strong>Widespread group</strong> - Widespread group (not necessarily just)</li>
+                    <li><strong>One just witness</strong> - For those not concerned with moons</li>
+                </ol>
+                
+                <div class="card info">
+                    <p><strong>Rule:</strong> Fasting applies to all lands - If seen in one place, applies to all.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Recommended Acts (Maliki)</h3>
+                <ul>
+                    <li>Suhur (eating before dawn)</li>
+                    <li>Delaying suhur (best in last half of night)</li>
+                    <li>Hastening breaking fast</li>
+                    <li>Breaking with fresh dates (odd number)</li>
+                    <li>Hurry to Maghrib prayer</li>
+                    <li>Refrain from unnecessary speech/actions</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Disliked Acts (Maliki)</h3>
+                <ul>
+                    <li>Perfume and smelling it (stirs desire)</li>
+                    <li>Cupping for sick (if fears exhaustion)</li>
+                    <li>Tasting food (if doesn't reach throat)</li>
+                    <li>Chewing gum (if no material)</li>
+                    <li>Foreplay (if knows safety)</li>
+                    <li>Continuous fasting (without breaking)</li>
+                </ul>
+            </div>
+        </section>
     </div>
 
     <script>
+        let currentSchool = 'shafii';
+
+        function changeSchool() {
+            const select = document.getElementById('schoolSelect');
+            currentSchool = select.value;
+            
+            // Update header
+            const headerP = document.querySelector('header p');
+            if (currentSchool === 'shafii') {
+                headerP.textContent = 'Interactive Guide to Fasting Rulings (Shafi\'i School)';
+            } else if (currentSchool === 'maliki') {
+                headerP.textContent = 'Interactive Guide to Fasting Rulings (Maliki School)';
+            } else {
+                headerP.textContent = 'Interactive Guide to Fasting Rulings (' + select.options[select.selectedIndex].text + ')';
+            }
+            
+            // Show/hide school-specific content
+            document.querySelectorAll('[data-school]').forEach(el => {
+                if (el.getAttribute('data-school') === currentSchool || el.getAttribute('data-school') === 'all') {
+                    el.style.display = '';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+            
+            // Show appropriate section based on school
+            if (currentSchool === 'maliki') {
+                // Hide all regular sections, show Maliki comprehensive
+                document.querySelectorAll('.section').forEach(section => {
+                    if (section.id !== 'maliki-comprehensive') {
+                        section.classList.remove('active');
+                        section.style.display = 'none';
+                    }
+                });
+                document.getElementById('maliki-comprehensive').classList.add('active');
+                document.getElementById('maliki-comprehensive').style.display = 'block';
+                
+                // Update nav buttons
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+            } else {
+                // Show regular sections
+                document.getElementById('maliki-comprehensive').classList.remove('active');
+                document.getElementById('maliki-comprehensive').style.display = 'none';
+                showSection('overview');
+            }
+        }
+
         function showSection(sectionId) {
+            // Don't show regular sections if Maliki is selected
+            if (currentSchool === 'maliki' && sectionId !== 'maliki-comprehensive') {
+                return;
+            }
+            
             // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
+                if (currentSchool === 'maliki') {
+                    section.style.display = 'none';
+                }
             });
             
             // Remove active class from all nav buttons
@@ -1146,10 +1452,16 @@
             });
             
             // Show selected section
-            document.getElementById(sectionId).classList.add('active');
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                section.style.display = 'block';
+            }
             
             // Add active class to clicked button
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
             
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1167,15 +1479,23 @@
             const rulings = {
                 'food': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Intentional eating breaks fasting. You must make up this day.' },
                 'drink': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Intentional drinking breaks fasting. You must make up this day.' },
-                'forgetful': { breaks: false, class: 'success', text: '✅ DOES NOT BREAK - Forgetful eating/drinking does not break fasting. Continue your fast.' },
+                'forgetful': currentSchool === 'maliki' 
+                    ? { breaks: true, class: 'danger', text: '❌ BREAKS FASTING (Maliki) - Forgetful eating/drinking breaks fasting and requires make-up in Maliki school. You must make up this day.' }
+                    : { breaks: false, class: 'success', text: '✅ DOES NOT BREAK (Shafi\'i) - Forgetful eating/drinking does not break fasting. Continue your fast.' },
                 'vomit': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Intentional vomiting breaks fasting. You must make up this day.' },
                 'vomit-involuntary': { breaks: false, class: 'success', text: '✅ DOES NOT BREAK - Involuntary vomiting does not break, but remove what you can and do not return anything to stomach.' },
-                'intercourse': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING + EXPIATION REQUIRED - Intercourse breaks fasting and requires expiation (if in Ramadan day). You must make up and perform expiation.' },
+                'intercourse': currentSchool === 'maliki'
+                    ? { breaks: true, class: 'danger', text: '❌ BREAKS FASTING + EXPIATION (Maliki) - Intercourse breaks fasting. Expiation required if intentional, by choice, without close justification. Expiation: choice of feed 60 poor (best), fast 2 months, or free slave.' }
+                    : { breaks: true, class: 'danger', text: '❌ BREAKS FASTING + EXPIATION (Shafi\'i) - Intercourse breaks fasting and requires expiation (if in Ramadan day). You must make up and perform expiation.' },
                 'masturbation': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Masturbation always breaks fasting. You must make up this day.' },
                 'wet-dream': { breaks: false, class: 'success', text: '✅ DOES NOT BREAK - Wet dream never breaks fasting. Continue your fast.' },
                 'menstruation': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Menstruation breaks fasting immediately. You must make up after purity.' },
-                'medicine-nose': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Medicine through nose reaches head (hollow part). You must make up this day.' },
-                'medicine-ear': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Ear drops reach inner ear (hollow part). You must make up this day.' },
+                'medicine-nose': currentSchool === 'maliki'
+                    ? { breaks: true, class: 'danger', text: '❌ BREAKS FASTING (Maliki) - Medicine through nose reaches throat. You must make up this day.' }
+                    : { breaks: true, class: 'danger', text: '❌ BREAKS FASTING (Shafi\'i) - Medicine through nose reaches head (hollow part). You must make up this day.' },
+                'medicine-ear': currentSchool === 'maliki'
+                    ? { breaks: true, class: 'danger', text: '❌ BREAKS FASTING (Maliki) - Ear drops reach throat. You must make up this day.' }
+                    : { breaks: true, class: 'danger', text: '❌ BREAKS FASTING (Shafi\'i) - Ear drops reach inner ear (hollow part). You must make up this day.' },
                 'enema': { breaks: true, class: 'danger', text: '❌ BREAKS FASTING - Enema breaks fasting. You must make up this day.' }
             };
 
@@ -1198,26 +1518,52 @@
                 return;
             }
 
-            let html = '<div class="result info"><h4>Your Expiation:</h4><ol>';
+            let html = '<div class="result info"><h4>Your Expiation:</h4>';
 
-            if (slave === 'yes') {
-                html += '<li><strong>Level 1: Free a Muslim slave</strong> who is able to work</li>';
-                html += '<li>You cannot skip to level 2 or 3</li>';
-            } else if (fast === 'yes') {
-                html += '<li><strong>Level 2: Fast 2 consecutive months</strong></li>';
-                html += '<li>Must intend from night (tabyit)</li>';
-                html += '<li>Must specify it is expiation (ta\'yin)</li>';
-                html += '<li>If breaks with excuse that allows fasting (sickness, travel) → Restart</li>';
-                html += '<li>If breaks with excuse that doesn\'t allow fasting (insanity, menstruation) → Continue</li>';
-            } else if (feed === 'yes') {
-                html += '<li><strong>Level 3: Feed 60 poor people</strong></li>';
-                html += '<li>1 mudd per person (≈750g staple food)</li>';
-                html += '<li>Must give to 60 different poor people</li>';
-                html += '<li>Cannot cook and invite them (must own the food)</li>';
+            if (currentSchool === 'maliki') {
+                // Maliki: Choice, not order
+                html += '<p><strong>Maliki School:</strong> You can choose any option (not required in order).</p><ol>';
+                
+                const options = [];
+                if (slave === 'yes') {
+                    options.push('<li><strong>Option 1: Free a Muslim slave</strong></li>');
+                }
+                if (fast === 'yes') {
+                    options.push('<li><strong>Option 2: Fast 2 consecutive months</strong> - Must be consecutive</li>');
+                }
+                if (feed === 'yes') {
+                    options.push('<li><strong>Option 3: Feed 60 poor people</strong> - 1 mudd each (≈750g) - BEST (benefit extends)</li>');
+                }
+                
+                if (options.length > 0) {
+                    html += options.join('');
+                    html += '<li><strong>Recommendation:</strong> Feeding 60 poor is best because benefit extends to others</li>';
+                } else {
+                    html += '<li><strong>Expiation remains in debt</strong></li>';
+                    html += '<li>Must perform when able</li>';
+                }
             } else {
-                html += '<li><strong>Expiation remains in debt</strong></li>';
-                html += '<li>Must perform when able</li>';
-                html += '<li>Even if you die, taken from estate</li>';
+                // Shafi'i: Order required
+                html += '<ol>';
+                if (slave === 'yes') {
+                    html += '<li><strong>Level 1: Free a Muslim slave</strong> who is able to work</li>';
+                    html += '<li>You cannot skip to level 2 or 3</li>';
+                } else if (fast === 'yes') {
+                    html += '<li><strong>Level 2: Fast 2 consecutive months</strong></li>';
+                    html += '<li>Must intend from night (tabyit)</li>';
+                    html += '<li>Must specify it is expiation (ta\'yin)</li>';
+                    html += '<li>If breaks with excuse that allows fasting (sickness, travel) → Restart</li>';
+                    html += '<li>If breaks with excuse that doesn\'t allow fasting (insanity, menstruation) → Continue</li>';
+                } else if (feed === 'yes') {
+                    html += '<li><strong>Level 3: Feed 60 poor people</strong></li>';
+                    html += '<li>1 mudd per person (≈750g staple food)</li>';
+                    html += '<li>Must give to 60 different poor people</li>';
+                    html += '<li>Cannot cook and invite them (must own the food)</li>';
+                } else {
+                    html += '<li><strong>Expiation remains in debt</strong></li>';
+                    html += '<li>Must perform when able</li>';
+                    html += '<li>Even if you die, taken from estate</li>';
+                }
             }
 
             html += '</ol></div>';
